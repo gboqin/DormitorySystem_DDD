@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "宿舍选项";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="utr-8" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/bundles/easyuicss")
+    @Styles.Render("~/bundles/mydefinedcss")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Initialization('#stypeid', '#dlg', '#divgrid', '#grid', '#toolbar', '#TypeId', '#TypeName',
+                '../api/apiDormSetting/GetOptiontypes', '../api/apiDormSetting/GetList');
+        });
+    </script>
+</head>
+<body>
+    <div class="panel-header"><div class="panel-title">@ViewBag.Title</div></div>
+    <div class="searchbar">
+        <table>
+            <tr>
+                <td>
+                    <span>选项名称：</span><input class="searchText" id="scontent" />
+                    <span>选项类别：</span><select class="easyui-combobox formbox" id="stypeid"></select>
+                </td>
+                <td>
+                    <a class="easyui-linkbutton" iconcls="icon-search" plain="true" onclick="doSearch('#divgrid', '#scontent', '#stypeid', '#grid', '../api/apiDormSetting/GetList')">查 询</a>
+                    <a class="easyui-linkbutton" iconcls="icon-clear" plain="true" onclick="doClean('#divgrid', '#scontent', '#stypeid', '#grid', '../api/apiDormSetting/GetList')">清 空</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar" id="toolbar">
+        <table>
+            <tr>
+                <td><a class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="doAdd('#dlg', '#grid', '../api/apiDormSetting/PostAdd')">新增</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="doEdit('#dlg', '#grid', '../api/apiDormSetting/PuteEdit')">修改</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="doDelete('#grid', '../api/apiDormSetting/PuteDelete') ">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="divgrid" class="divgrid">
+        <table id="grid"></table>
+    </div>
+    <div class="dlg" id="dlg">
+        <form>
+            <input type="hidden" id="Id" name="Id" />
+            <input type="hidden" id="TypeName" name="TypeName" />
+            <table class="dlgtable">
+               <tr><td><span class="spansize">选项类别：</span></td><td><select class="easyui-combobox formbox" required id="TypeId" name="TypeId"></select></td></tr>
+               <tr><td><span class="spansize">选项名称：</span></td><td><input type="text" class="easyui-validate formtext" required id="Content" name="Content" /></td></tr>
+            </table>
+        </form>
+    </div>
+    @Scripts.Render("~/bundles/easyuijs")
+    @Scripts.Render("~/bundles/dsettinggridjs")
+</body>
+</html>

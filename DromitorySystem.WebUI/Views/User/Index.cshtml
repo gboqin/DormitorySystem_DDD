@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "用户设置";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" charset="utf-8" /> 
+    @Styles.Render("~/bundles/easyuicss")
+    @Scripts.Render("~/bundles/jquery")
+    <style type="text/css">
+        *,body{margin:0;padding:0;}
+        #toolbar{border:1px solid #95b8e7;border-top:none;border-bottom:none;background-color:#f4f4f4;}
+        .formtext{border:1px solid #95b8e7;width:135px;height:20px;padding-left:2px;}
+        #usr_lev_Id{width:139px;}
+        #divDlg{width:280px;}
+        #divDlg table span{font-size:14px;}
+        #divDlg table{margin:20px auto 15px auto;}
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Initialization('#divDlg', '#userGrid', '../api/apiUser/GetUserGrid');
+            getcomboData('#usr_lev_Id', '#usr_Level', "../api/apiUser/GetLevels");
+        });
+    </script>
+</head>
+<body>
+    <div class="panel-header">
+        <div class="panel-title">@ViewBag.Title</div>
+    </div>
+    <div id="toolbar">
+        <table>
+            <tr>
+                <td><a class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="addUser('#divDlg', '#userGrid', '../api/apiUser/PostUser');">新增</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="edtUser('#divDlg', '#userGrid', '../api/apiUser/PuteUser')">修改</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="delUser('#userGrid', '../api/apiUser/PuteDeleteUser')">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <table id="userGrid"></table>
+    <div id="divDlg">
+        <form id="formDlg">
+            <input type="hidden" id="Id" name="Id" />
+            <input type="hidden" id="usr_Level" name="usr_Level" />
+            <table>
+                <tr><td><span>工号：</span></td><td><input id="usr_Code" name="usr_Code" type="text" class="easyui-validatebox formtext" required /></td></tr>
+                <tr><td><span>姓名：</span></td><td><input id="usr_Name" name="usr_Name" type="text" class="easyui-validatebox formtext" required /></td></tr>
+                <tr><td><span>密码：</span></td><td><input id="usr_Password" name="usr_Password" type="password" class="easyui-validatebox formtext" required /></td></tr>
+                <tr><td><span>级别：</span></td><td><select id="usr_lev_Id" name="usr_lev_Id" class="easyui-combobox" required></select></td></tr>
+            </table>
+        </form>
+    </div>
+    
+    @Scripts.Render("~/bundles/easyuijs")
+    @Scripts.Render("~/bundles/userjs")
+</body>
+</html>
+
+

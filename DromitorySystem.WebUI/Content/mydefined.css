@@ -1,0 +1,11 @@
+﻿*,body {margin:0;padding:0;}
+.searchbar{background-color:#f4f4f4;font-size:13px;padding:5px;border:1px solid #95b8e7;border-top:none;}
+.searchText{width:121px;height:20px;padding-left:2px;border:1px solid #95b8e7;}
+.divgrid{margin-top:5px;}
+.toolbar{background-color:#f4f4f4;}
+.dlg{width:300px;}
+.spansize{font-size:14px;}
+.dlgtable{margin:20px auto 15px auto;}
+.formtext{border:1px solid #95b8e7;width:135px;height:20px;padding-left:2px;}
+.formtextarea{border:1px solid #95b8e7;width:135px;padding-left:2px;}
+.formbox{width:139px;}

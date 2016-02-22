@@ -1,0 +1,25 @@
+﻿ @{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>宿舍信息管理系统</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><h1>错误!</h1></td>
+        </tr>
+        <tr>
+            <td><h2>非法登录或超时，请重新登录。</h2></td>
+            <td>
+                <div>
+                    <input type="button" onclick="parent.location.href = '@Url.Action("LogOff", "Account")'" value="重新登录" />
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

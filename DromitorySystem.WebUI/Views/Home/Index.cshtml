@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "宿舍信息管理系统";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style type="text/css">
+        body {margin: 0;padding: 0;}
+        .container {width: 940px;margin: 2px auto 0px auto;padding: 0;}
+        div ul {background-color: #0055A6;}
+        div ul li a {color: white;}
+        #divifr {width: 940px;margin: 2px auto 0px auto;padding: 0;}
+        #ifr {margin: 2px auto 0px auto;padding: 0;width: 100%;}
+    </style>
+    <script type="text/javascript">
+        function SetIframeHeight() {
+            var Iframe = document.getElementById("ifr");
+            try {
+                var bHeight = Iframe.contentWindow.document.body.scrollHeight;
+                var dHeight = Iframe.contentWindow.document.documentElement.scrollHeight;
+                var height = Math.max(bHeight, dHeight);
+                Iframe.height = height;
+                //if (height <= 1500) {
+                //    Iframe.height = height;
+                //}           
+            }
+            catch (ex) { return false; }
+        }
+        window.setInterval('SetIframeHeight()', 200);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <ul class="nav nav-pills" style="width:940px;">
+            <li class="active"><a onclick="href='@Url.Action("Index","Home")'">首页</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">员工信息<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">员工个人信息</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">导入员工信息</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">员工住房<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">员工住宿资料</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">新员工住宿登记</a></li>
+                    <li><a href="#">员工物品登记</a></li>
+                    <li><a href="#">员工公物申领</a></li>
+                    <li><a href="#">员工调房办理</a></li>
+                    <li><a href="#">员工调床处理</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">员工退宿登记</a></li>
+                    <li><a href="#">员工离厂办理</a></li>
+                    <li><a href="#">员工个人扣款</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">员工请假备案</a></li>
+                    <li><a href="#">员工公干备案</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">家属入住<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">员工家属资料</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">家属入住</a></li>
+                    <li><a href="#">家属公物申领</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">家属退宿</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">宿舍管理<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">宿舍住宿报表</a></li>
+                    <li class="divider"></li>
+                    <li><a onclick="ifr.location.href='@Url.Action("Index","DormSetRelation")'">宿舍设置</a></li>
+                    <li><a onclick="ifr.location.href='@Url.Action("Index","Dormitory")'">宿舍楼管理</a></li>
+                    <li><a onclick="ifr.location.href='@Url.Action("Index","DormSetting")'">宿舍选项设置</a></li>
+                    <li><a onclick="ifr.location.href='@Url.Action("Index","DormOptiontype")'">宿舍选项类别</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">宿舍设备信息</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">系统设置 <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a onclick="ifr.location.href='@Url.Action("Index","User")'">用户设置</a></li>
+                    <li><a onclick="ifr.location.href='@Url.Action("Index","Department")'">部门设置</a></li>
+                    <li class="divider"></li>
+                    <li><a onclick="ifr.location.href='@Url.Action("Index","Goods")'">物料清单</a></li>
+                </ul>
+            </li>
+            <li class="navbar-right">
+                <a onclick="location.href='@Url.Action("LogOff", "Account")'" style=" background-color:#0055A6;color: red; cursor: pointer;">注销</a>
+            </li>
+            <li class="navbar-right">
+                <a style="background-color:#0055A6;color: white;">用户：</a>
+            </li>
+        </ul>
+    </div>
+    <div id="divifr"><iframe id="ifr" name="ifr" frameborder="0" scrolling="no" onload="this.height=100"></iframe></div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

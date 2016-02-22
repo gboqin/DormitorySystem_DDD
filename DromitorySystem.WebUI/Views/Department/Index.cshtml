@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "部门设置";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>    
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/bundles/easyuicss")   
+    <style type="text/css">
+        *,body{margin:0;padding:0;}
+        .toolbar{border:1px solid #95b8e7;border-top:none;border-bottom:none;background-color:#f4f4f4;}
+        #divDlg{width:280px;}
+        #divDlg table span{font-size:14px;}
+        #divDlg table{margin:20px auto 15px auto;}
+        #deptTree{padding:5px 0;}
+        .formtext{width:148px;height:20px;border:1px solid #95B8E7;margin:5px 0 5px 0;padding-left:2px;}
+        #pid{width:148px;}
+    </style>     
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Initialization('#divDlg', '#deptTree', '#pid', '../api/apiDept/GetTree');
+        });       
+    </script>
+</head>
+<body>
+    <div class="panel-header"> 
+        <div class="panel-title">@ViewBag.Title</div>
+    </div>
+    <div class="toolbar">
+        <table>
+            <tr>
+                <td><a class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="doAdd('#divDlg', '#deptTree', '#pid', '../api/apiDept/PostDept')">新增</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="doEdit('#divDlg', '#deptTree', '#pid', '../api/apiDept/PuteDept')">修改</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="doDelete('#deptTree', '#pid', '../api/apiDept/PuteDTree')">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="treepanel" class="easyui-panel">
+        <ul id="deptTree" class="easyui-tree"></ul>
+    </div>
+    <div id="divDlg">
+        <form id="formDlg">
+            <input type="hidden" id="id" name="id" />
+            <table>
+                <tr><td>部门名称：</td><td><input type="text" id="text" name="text" class="easyui-validatebox formtext" required /></td></tr>
+                <tr><td>父 部 门：</td><td><input type="text" id="pid" name="pid" class="easy-combotree" /></td></tr>
+                <tr><td>排 序 码：</td><td><input type="text" id="order" name="order" class="easyui-validatebox formtext" @* placeholder="1001.11" pattern="[0-9],[.]"*@ /></td></tr>
+            </table>
+        </form>
+    </div>
+    @Scripts.Render("~/bundles/easyuijs")
+    @Scripts.Render("~/bundles/depttreejs")
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "宿舍设置";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/bundles/easyuicss")
+    @Styles.Render("~/bundles/mydefinedcss")
+    @Scripts.Render("~/bundles/jquery")
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/sys_js/dormsetrelation.js")"></script>*@
+    <style type="text/css">
+        html,body{ margin:0;padding:0;}
+        .dlgwidth{width:260px;}
+        .table-margin{margin:25px 20px 30px 20px;}
+        .combo-width{width:148px;}
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Initialization('#divDlg', '#buildtree', '../api/apiDSRService/GetDormitoryTree', '#grid', '../api/apiDSRService/GetDormSetings');
+            getcomboboxdata('#dsr_SetTypeId', '../api/apiDSRService/GetOptiontype', '#dsr_DormSetId', '../api/apiDSRService/GetSetting');
+        });
+    </script>
+</head>
+<body class="easyui-layout">
+    <form id="form1" style="height:650px; border:green 0px solid;" region="center">
+        <div region="center" title="设置管理" iconCls="icon-users" style="padding: 2px;">
+            <div id="toolbar">
+                <table>
+                    <tr>
+                        <td><a class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="doAdd('#divDlg', '#buildtree', '#grid', '#coverdiv', '../api/apiDSRService/PostSetRelation')">新增</a></td>
+                        <td><a class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="doEdit('#divDlg', '#grid', '#dsr_DormSetId', '#coverdiv', '../api/apiDSRService/PuteSetRelation', '../api/apiDSRService/GetSetting')">修改</a></td>
+                        <td><a class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="doDelete('#grid', '../api/apiDSRService/PuteDelSetRelation')">删除</a></td>
+                    </tr>
+                </table>
+            </div>
+            <table id="grid" toolbar="#toolbar"></table>
+        </div>
+        <div region="west" iconCls="icon-chart_organisation" split="true" title="宿舍单元" style="width:220px;padding: 5px" collapsible="false">
+            <ul id="buildtree"></ul>
+        </div>
+    </form>
+
+    <div id="divDlg" class="dlgwidth">
+        <form id="formDlg">
+            <input type="hidden" id="Id" name="Id" />
+            <input type="hidden" id="dsr_DormId" name="dsr_DormId" value="0" />
+            <table class="table-margin">
+                <tr><td>选项类别：</td><td><input type="text" id="dsr_SetTypeId" name="dsr_SetTypeId" class="easy-combobox combo-width" required /></td></tr>
+                <tr><td>选项内容：</td><td><input type="text" id="dsr_DormSetId" name="dsr_DormSetId" class="easy-combobox combo-width" data-options="valueField:'Id',textField:'Content'" required /></td></tr>
+                <tr><td><input type="checkbox" id="dsr_Private" value="true" name="dsr_Private" /></td><td><label for="dsr_Private">特定</label></td></tr>
+                <tr id="coverdiv"><td><input type="checkbox" id="dsr_Cover" value="true" name="dsr_Cover" /></td><td><label for="dsr_Cover">覆盖所属节点</label></td></tr>
+            </table>
+        </form>
+    </div>
+    @Scripts.Render("~/bundles/easyuijs")
+    @Scripts.Render("~/bundles/commonjs")
+    @Scripts.Render("~/bundles/dormsetrelationjs")
+</body>
+</html>

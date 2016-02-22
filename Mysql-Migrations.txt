@@ -1,0 +1,9 @@
+PM> enable-migrations -ProjectName DormitorySystem.Repositories -StartUpProjectName DromitorySystem.WebUI -Verbose 
+
+PM> Add-Migration -Name "updateDepartment"  -ProjectName DormitorySystem.Repositories -StartUpProjectName DromitorySystem.WebUI -ConnectionStringName "default" -Verbose
+
+PM> Update-Database -Script -ProjectName DormitorySystem.Repositories -StartUpProjectName DromitorySystem.WebUI -ConnectionStringName "default"  -Verbose
+
+1 目前不行
+2 只能过删除重新生成
+3 (departmentcontroller)webui引用Domain

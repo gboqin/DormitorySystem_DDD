@@ -1,0 +1,63 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "设置选项";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/bundles/easyuicss")
+    @Styles.Render("~/bundles/mydefinedcss")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Initialization('#dlg', '#divgrid', '#grid', '#toolbar', '../api/apiDOT/GetByName')
+        });
+    </script>
+</head>
+<body>
+    <div class="panel-header"><div class="panel-title">@ViewBag.Title</div></div>
+    <div class="searchbar">
+        <table>
+            <tr>
+                <td>
+                    <span>选项类别:</span>
+                    <input id="sname" class="searchText" />
+                    <a class="easyui-linkbutton" iconcls="icon-search" plain="true" onclick="doSearch('#grid', '#divgrid', '../api/apiDOT/GetByName')">
+                        查 询
+                    </a>
+                    <a class="easyui-linkbutton" iconcls="icon-clear" plain="true" onclick="doClean('#grid', '#divgrid', '../api/apiDOT/GetByName')">
+                        清 空
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="toolbar" class="toolbar">
+        <table>
+            <tr>
+                <td><a class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="doAdd('#dlg', '#grid', '../api/apiDOT/PostAdd')">新增</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="doEdit('#dlg', '#grid', '../api/apiDOT/PuteEdit')">修改</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="doDelete('#grid', '../api/apiDOT/PuteDelete')">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="divgrid" class="divgrid">
+        <table id="grid"></table>
+    </div>
+    <div id="dlg" class="dlg">
+        <form id="dlgform">
+            <input type="hidden" id="Id" name="Id" />
+            <table class="dlgtable">
+                <tr><td><span class="spansize">选项类别：</span></td><td><input type="text" class="easyui-validatebox formtext" id="Name" name="Name" required /></td></tr>
+                <tr><td><span class="spansize">选项描述：</span></td><td><textarea class="easyui-validatebox formtextarea" id="Decription" name="Decription"></textarea></td></tr>
+            </table>
+        </form>
+    </div>
+    @Scripts.Render("~/bundles/easyuijs")
+    @Scripts.Render("~/bundles/dotgridjs")
+</body>
+</html>

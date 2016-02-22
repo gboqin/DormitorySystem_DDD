@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "宿舍管理";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/bundles/easyuicss")
+    @Styles.Render("~/bundles/mydefinedcss")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Initialization('#dlg', '#grid', '../api/apiDormitory/GetList');
+        });
+    </script>
+</head>
+<body>
+    <div class="panel-header"><div class="panel-title">@ViewBag.Title</div></div>
+    <div class="toolbar" id="toolbar">
+        <table>
+            <tr>
+                <td><a class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="doAdd('#dlg','#grid','../api/apiDormitory/PostAdd')">新增</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="doDelete('#grid', '../api/apiDormitory/PuteDelete')">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="divgrid" id="divgrid"><table id="grid" class="easyui-treegrid"></table></div>
+    <div id="dlg" class="dlg">
+        <form>
+            <table class="dlgtable">
+                <tr><td><span class="spansize">宿舍楼号：</span></td><td><input type="text" id="dorm_core" name="dorm_core" class="easyui-validatebox formtext" required /></td></tr>
+                <tr><td><span class="spansize">层高：</span></td><td><input type="text" name="dorm_levels" class="easyui-numberspinner formtext" data-options="min:1,max:9,required:true" /></td></tr>
+                <tr><td><span class="spansize">每层房数：</span></td><td><input type="text" name="dorm_rooms" class="easyui-numberspinner formtext" data-options="min:1,max:50,required:true" /></td></tr>
+                <tr><td><span class="spansize">每间床数：</span></td><td><input type="text" name="dorm_bads" class="easyui-numberspinner formtext" data-options="min:1,max:20" /></td></tr>
+            </table>
+        </form>
+    </div>
+    @Scripts.Render("~/bundles/easyuijs")
+    @Scripts.Render("~/dundles/dormitorytreegridjs")
+</body>
+</html>

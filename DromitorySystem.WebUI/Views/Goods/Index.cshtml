@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "物品清单";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/bundles/easyuicss")
+    <style type="text/css">
+        *,body{margin:0;padding:0;}
+        #searchbar{background-color:#f4f4f4;font-size:13px;padding:5px;border:1px solid #95b8e7;border-top:none;}
+        .searchText{width:121px;height:20px;}
+        #divgrid{margin-top:5px;}
+        #toolbar{background-color:#f4f4f4;}
+        #dlg{width:300px;}
+        #dlg table span{font-size:14px;}
+        #dlg table{margin:20px auto 15px auto;}
+        .formtext{border:1px solid #95b8e7;width:135px;height:20px;padding-left:2px;}
+        .formtextarea{border:1px solid #95b8e7;width:135px;padding-left:2px;}
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Initialization('#dlg', '#divgrid', '#grid','#toolbar', '../api/apiGoods/GetByName');
+        });
+    </script>
+</head>
+<body>
+    <div class="panel-header"><div class="panel-title">@ViewBag.Title</div></div>
+    <div id="searchbar">
+        <table>
+            <tr>
+                <td>
+                    <span>物品名称:</span>
+                    <input id="sname" class="searchText" />
+                    <a class="easyui-linkbutton" iconcls="icon-search" plain="true" onclick="doSearch('#grid', '#divgrid', '../api/apiGoods/GetByName')">
+                        查 询
+                    </a>
+                    <a class="easyui-linkbutton" iconcls="icon-clear" plain="true" onclick="doClean('#grid', '#divgrid', '../api/apiGoods/GetByName')">
+                        清 空
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="toolbar">
+        <table>
+            <tr>
+                <td><a class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="doAdd('#dlg', '#grid', '../api/apiGoods/PostGoods')">新增</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="doEdit('#dlg', '#grid', '../api/apiGoods/PuteGoods')">修改</a></td>
+                <td><a class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="doDelete('#dlg', '#grid', '../api/apiGoods/PuteDGoods')">删除</a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="divgrid">
+        <table id="grid"></table>
+    </div>
+    <div id="dlg">
+        <form id="dlgform">
+            <input type="hidden" id="Id" name="Id" />
+            <table>
+                <tr><td><span>物品名称：</span></td><td><input type="text" class="easyui-validatebox formtext" id="Name" name="Name" required /></td></tr>
+                <tr><td><span>物品规格：</span></td><td><input type="text" class="easyui-validatebox formtext" id="Spec" name="Spec" /></td></tr>
+                <tr><td><span>物品描述：</span></td><td><textarea class="easyui-validatebox formtextarea" id="Decription" name="Decription"></textarea></td></tr>
+            </table>
+        </form>
+    </div>
+    @Scripts.Render("~/bundles/easyuijs")
+    @Scripts.Render("~/bundles/goodsjs")
+</body>
+</html>
